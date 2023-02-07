@@ -1,0 +1,426 @@
+
+DATA DEFINITION LANGUAGE 
+Manipular la estruuctura de su base de datos 
+
+DATA MANIPULATION LANGUAGE 
+Manipular datos almacenados en la bd
+
+que es y para que sirve un charset y un collate 
+
+
+MySQL Shell 8.0.31
+
+Copyright (c) 2016, 2022, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect
+\connect [--mx|--mysqlx|--mc|--mysql] [--ssh <sshuri>] <URI>
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 8
+Server version: 8.0.31 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| bdpendientes       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.0153 sec)
+ MySQL  localhost:3306 ssl  SQL > create database evaluacion_1;
+Query OK, 1 row affected (0.1069 sec)
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| bdpendientes       |
+| evaluacion_1       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.0028 sec)
+ MySQL  localhost:3306 ssl  SQL > create database if not exists evaluacion_1
+                               -> ;
+Query OK, 1 row affected, 1 warning (0.1499 sec)
+Note (code 1007): Can't create database 'evaluacion_1'; database exists
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| bdpendientes       |
+| evaluacion_1       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.0028 sec)
+ MySQL  localhost:3306 ssl  SQL > \use evaluacion_1
+Default schema set to `evaluacion_1`.
+Fetching global names, object names from `evaluacion_1` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
+Empty set (0.0403 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > drop database evaluacion_1;
+Query OK, 0 rows affected (0.1075 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
+ERROR: 1046 (3D000): No database selected
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > \use world
+Default schema set to `world`.
+Fetching global names, object names from `world` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  world  SQL > \show databases
+Unknown report: databases
+ MySQL  localhost:3306 ssl  world  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| bdpendientes       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.0040 sec)
+ MySQL  localhost:3306 ssl  world  SQL > create database evaluacion_1;
+Query OK, 1 row affected (0.0592 sec)
+ MySQL  localhost:3306 ssl  world  SQL > create show databases;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'show databases' at line 1
+ MySQL  localhost:3306 ssl  world  SQL > \create show databases
+Unknown command: '\create show databases'
+ MySQL  localhost:3306 ssl  world  SQL >  show databases;
++--------------------+
+| Database           |
++--------------------+
+| bdpendientes       |
+| evaluacion_1       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.0031 sec)
+ MySQL  localhost:3306 ssl  world  SQL > \use evaluacion_1
+Default schema set to `evaluacion_1`.
+Fetching global names, object names from `evaluacion_1` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > create table primer_tabla(
+                                             -> id int,
+                                             -> nombre varchar(50));
+Query OK, 0 rows affected (0.1786 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
++------------------------+
+| Tables_in_evaluacion_1 |
++------------------------+
+| primer_tabla           |
++------------------------+
+1 row in set (0.0051 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc primer_tabla;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | YES  |     | NULL    |       |
+| nombre | varchar(50) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.0075 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL >
+
+Nueva parte
+
+MySQL Shell 8.0.31
+
+Copyright (c) 2016, 2022, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect
+\connect [--mx|--mysqlx|--mc|--mysql] [--ssh <sshuri>] <URI>
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 8
+Server version: 8.0.31 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| bdpendientes       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.0153 sec)
+ MySQL  localhost:3306 ssl  SQL > create database evaluacion_1;
+Query OK, 1 row affected (0.1069 sec)
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| bdpendientes       |
+| evaluacion_1       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.0028 sec)
+ MySQL  localhost:3306 ssl  SQL > create database if not exists evaluacion_1
+                               -> ;
+Query OK, 1 row affected, 1 warning (0.1499 sec)
+Note (code 1007): Can't create database 'evaluacion_1'; database exists
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| bdpendientes       |
+| evaluacion_1       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.0028 sec)
+ MySQL  localhost:3306 ssl  SQL > \use evaluacion_1
+Default schema set to `evaluacion_1`.
+Fetching global names, object names from `evaluacion_1` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
+Empty set (0.0403 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > drop database evaluacion_1;
+Query OK, 0 rows affected (0.1075 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
+ERROR: 1046 (3D000): No database selected
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > \use world
+Default schema set to `world`.
+Fetching global names, object names from `world` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  world  SQL > \show databases
+Unknown report: databases
+ MySQL  localhost:3306 ssl  world  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| bdpendientes       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.0040 sec)
+ MySQL  localhost:3306 ssl  world  SQL > create database evaluacion_1;
+Query OK, 1 row affected (0.0592 sec)
+ MySQL  localhost:3306 ssl  world  SQL > create show databases;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'show databases' at line 1
+ MySQL  localhost:3306 ssl  world  SQL > \create show databases
+Unknown command: '\create show databases'
+ MySQL  localhost:3306 ssl  world  SQL >  show databases;
++--------------------+
+| Database           |
++--------------------+
+| bdpendientes       |
+| evaluacion_1       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.0031 sec)
+ MySQL  localhost:3306 ssl  world  SQL > \use evaluacion_1
+Default schema set to `evaluacion_1`.
+Fetching global names, object names from `evaluacion_1` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > create table primer_tabla(
+                                             -> id int,
+                                             -> nombre varchar(50));
+Query OK, 0 rows affected (0.1786 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
++------------------------+
+| Tables_in_evaluacion_1 |
++------------------------+
+| primer_tabla           |
++------------------------+
+1 row in set (0.0051 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc primer_tabla;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | YES  |     | NULL    |       |
+| nombre | varchar(50) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.0075 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > \use sakila
+Default schema set to `sakila`.
+Fetching global names, object names from `sakila` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  sakila  SQL > drop database evaluacion_1;
+Query OK, 1 row affected (0.1152 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| bdpendientes       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.0038 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > create database evaluacion_1;
+Query OK, 1 row affected (0.0456 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > create table primer_tabla;
+ERROR: 4028 (HY000): A table must have at least one visible column.
+ MySQL  localhost:3306 ssl  sakila  SQL > \use evaluacion_1
+Default schema set to `evaluacion_1`.
+Fetching global names, object names from `evaluacion_1` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > create table primer_tabla(
+                                             -> id int,
+                                             -> nombre varchar(50));
+Query OK, 0 rows affected (0.2004 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
++------------------------+
+| Tables_in_evaluacion_1 |
++------------------------+
+| primer_tabla           |
++------------------------+
+1 row in set (0.0048 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc primer_tabla;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | YES  |     | NULL    |       |
+| nombre | varchar(50) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.0065 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > \use sakila
+Default schema set to `sakila`.
+Fetching global names, object names from `sakila` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  sakila  SQL > show tables;
++----------------------------+
+| Tables_in_sakila           |
++----------------------------+
+| actor                      |
+| actor_info                 |
+| address                    |
+| category                   |
+| city                       |
+| country                    |
+| customer                   |
+| customer_list              |
+| film                       |
+| film_actor                 |
+| film_category              |
+| film_list                  |
+| film_text                  |
+| inventory                  |
+| language                   |
+| nicer_but_slower_film_list |
+| payment                    |
+| rental                     |
+| sales_by_film_category     |
+| sales_by_store             |
+| staff                      |
+| staff_list                 |
+| store                      |
++----------------------------+
+23 rows in set (0.0061 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > create table metiche(
+                                       -> id int,
+                                       -> nombre varchar(50));
+Query OK, 0 rows affected (0.1510 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > show tables;
++----------------------------+
+| Tables_in_sakila           |
++----------------------------+
+| actor                      |
+| actor_info                 |
+| address                    |
+| category                   |
+| city                       |
+| country                    |
+| customer                   |
+| customer_list              |
+| film                       |
+| film_actor                 |
+| film_category              |
+| film_list                  |
+| film_text                  |
+| inventory                  |
+| language                   |
+| metiche                    |
+| nicer_but_slower_film_list |
+| payment                    |
+| rental                     |
+| sales_by_film_category     |
+| sales_by_store             |
+| staff                      |
+| staff_list                 |
+| store                      |
++----------------------------+
+24 rows in set (0.0063 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > drop table metiche;
+Query OK, 0 rows affected (0.1280 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > show tables;
++----------------------------+
+| Tables_in_sakila           |
++----------------------------+
+| actor                      |
+| actor_info                 |
+| address                    |
+| category                   |
+| city                       |
+| country                    |
+| customer                   |
+| customer_list              |
+| film                       |
+| film_actor                 |
+| film_category              |
+| film_list                  |
+| film_text                  |
+| inventory                  |
+| language                   |
+| nicer_but_slower_film_list |
+| payment                    |
+| rental                     |
+| sales_by_film_category     |
+| sales_by_store             |
+| staff                      |
+| staff_list                 |
+| store                      |
++----------------------------+
+23 rows in set (0.0063 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL >
