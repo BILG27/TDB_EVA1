@@ -1,0 +1,284 @@
+EVA1_2_
+MySQL Shell 8.0.31
+
+Copyright (c) 2016, 2022, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect
+\connect [--mx|--mysqlx|--mc|--mysql] [--ssh <sshuri>] <URI>
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 8
+Server version: 8.0.31 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > show database;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database' at line 1
+ MySQL  localhost:3306 ssl  SQL > \show database
+Unknown report: database
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| bdpendientes       |
+| evaluacion_1       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.0555 sec)
+ MySQL  localhost:3306 ssl  SQL > \use evaluacion_1;
+MySQL Error 1049: Unknown database 'evaluacion_1;'
+ MySQL  localhost:3306 ssl  SQL > \use evaluacion_1
+Default schema set to `evaluacion_1`.
+Fetching global names, object names from `evaluacion_1` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
++------------------------+
+| Tables_in_evaluacion_1 |
++------------------------+
+| primer_tabla           |
++------------------------+
+1 row in set (0.0049 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc primet_tabla;
+ERROR: 1146 (42S02): Table 'evaluacion_1.primet_tabla' doesn't exist
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc primet_tabla;
+ERROR: 1146 (42S02): Table 'evaluacion_1.primet_tabla' doesn't exist
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc primer_tabla;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | YES  |     | NULL    |       |
+| nombre | varchar(50) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.0066 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table primer_tabla
+                                             -> add column edad int
+                                             -> after nombre;
+Query OK, 0 rows affected (0.9857 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc primer_tabla;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | YES  |     | NULL    |       |
+| nombre | varchar(50) | YES  |     | NULL    |       |
+| edad   | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.0052 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table primer_tabla
+                                             -> drop edad;
+Query OK, 0 rows affected (0.1424 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc primer_tabla;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | YES  |     | NULL    |       |
+| nombre | varchar(50) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.0052 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table primer_tabla
+                                             -> add column hapellidos varchar(50)
+                                             -> after nombre;
+Query OK, 0 rows affected (0.0630 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc primer_tabla;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| id         | int         | YES  |     | NULL    |       |
+| nombre     | varchar(50) | YES  |     | NULL    |       |
+| hapellidos | varchar(50) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.0050 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > rename column old_col_hapellidos
+                                             ->
+                                             -> ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column old_col_hapellidos' at line 1
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table primer_tabla
+                                             -> ;
+Query OK, 0 rows affected (0.0836 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc primr_tabla;
+ERROR: 1146 (42S02): Table 'evaluacion_1.primr_tabla' doesn't exist
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc primer_tabla;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| id         | int         | YES  |     | NULL    |       |
+| nombre     | varchar(50) | YES  |     | NULL    |       |
+| hapellidos | varchar(50) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.0070 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table primer_tabla
+                                             -> rename column hapellidos to
+                                             -> apellidos;
+Query OK, 0 rows affected (0.1023 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc primer_tabla;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| id        | int         | YES  |     | NULL    |       |
+| nombre    | varchar(50) | YES  |     | NULL   modify nombre varchar(255),
+                                             -> ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > modify nombre varchar(255),
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > modify nombre varchar(255)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL >
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table primer_tabla  modify nombre varchar(255), modify apellido varchar (255);
+ERROR: 1054 (42S22): Unknown column 'apellido' in 'primer_tabla'
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
++------------------------+
+| Tables_in_evaluacion_1 |
++------------------------+
+| primer_tabla           |
++------------------------+
+1 row in set (0.0045 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc primer_tabla;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| id        | int         | YES  |     | NULL    |       |
+| nombre    | varchar(50) | YES  |     | NULL    |       |
+| apellidos | varchar(50) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.0054 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table perimer_tabla
+                                             -> modify nombre varchar (255),
+                                             -> modify apellidos varchar (255);
+ERROR: 1146 (42S02): Table 'evaluacion_1.perimer_tabla' doesn't exist
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table primer_tabla
+                                             -> modify nombre varchar (255),
+                                             -> modify apellidos varchar (255);
+Query OK, 0 rows affected (0.3648 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc primer_tabla;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| id        | int          | YES  |     | NULL    |       |
+| nombre    | varchar(255) | YES  |     | NULL    |       |
+| apellidos | varchar(255) | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+3 rows in set (0.0050 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| bdpendientes       |
+| evaluacion_1       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.0029 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > create database empleados;
+Query OK, 1 row affected (0.0643 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| bdpendientes       |
+| empleados          |
+| evaluacion_1       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (0.0031 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > \use empleados
+Default schema set to `empleados`.
+Fetching global names, object names from `empleados` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  empleados  SQL > create table empleado(
+                                          -> id int,
+                                          -> nombre varchar (50),
+                                          -> apellido varchar (50),
+                                          -> fecha_nacimiento datetime,
+                                          -> rfc varchar (30),
+                                          -> ciudad_nacimiento text,
+                                          -> estado int,
+                                          -> numero_tel varchar (50);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 9
+ MySQL  localhost:3306 ssl  empleados  SQL > create table empleado(
+                                          -> id int,
+                                          -> nombre varchar (50),
+                                          -> apellido varchar(50),
+                                          -> fecha_nacimiento datetime,
+                                          -> rfc varchar (30),
+                                          -> ciudad_nacimiento text,
+                                          -> estado int,
+                                          -> numero_tel carchar (50));
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'carchar (50))' at line 9
+ MySQL  localhost:3306 ssl  empleados  SQL > create table empleado( id int, nombre varchar (50), apellido varchar (50), fecha_nacimiento datetime, rfc varchar (30), ciudad_nacimiento text, estado int, numero_tel varchar (50);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+ MySQL  localhost:3306 ssl  empleados  SQL > create table empleado( id int, nombre varchar (50), apellido varchar (50), fecha_nacimiento datetime, rfc varchar (30), ciudad_nacimiento text, estado int, numero_tel varchar (50));
+Query OK, 0 rows affected (0.1415 sec)
+ MySQL  localhost:3306 ssl  empleados  SQL > show tables;
++---------------------+
+| Tables_in_empleados |
++---------------------+
+| empleado            |
++---------------------+
+1 row in set (0.0065 sec)
+ MySQL  localhost:3306 ssl  empleados  SQL > desc empleado;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| id                | int         | YES  |     | NULL    |       |
+| nombre            | varchar(50) | YES  |     | NULL    |       |
+| apellido          | varchar(50) | YES  |     | NULL    |       |
+| fecha_nacimiento  | datetime    | YES  |     | NULL    |       |
+| rfc               | varchar(30) | YES  |     | NULL    |       |
+| ciudad_nacimiento | text        | YES  |     | NULL    |       |
+| estado            | int         | YES  |     | NULL    |       |
+| numero_tel        | varchar(50) | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+8 rows in set (0.0079 sec)
+ MySQL  localhost:3306 ssl  empleados  SQL > alter table empleado
+                                          -> add nss varchar (20),
+                                          -> add pais varchar (20),
+                                          -> ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+ MySQL  localhost:3306 ssl  empleados  SQL > alter table empleado add nss varchar (20), add pais varchar (20) after estado, rename column numero_tel to celular, add telefono_fijo varchar (20) after celular, add id_depto int after id;
+Query OK, 0 rows affected (0.0866 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  empleados  SQL > desc empleado;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| id                | int         | YES  |     | NULL    |       |
+| id_depto          | int         | YES  |     | NULL    |       |
+| nombre            | varchar(50) | YES  |     | NULL    |       |
+| apellido          | varchar(50) | YES  |     | NULL    |       |
+| fecha_nacimiento  | datetime    | YES  |     | NULL    |       |
+| rfc               | varchar(30) | YES  |     | NULL    |       |
+| ciudad_nacimiento | text        | YES  |     | NULL    |       |
+| estado            | int         | YES  |     | NULL    |       |
+| pais              | varchar(20) | YES  |     | NULL    |       |
+| celular           | varchar(50) | YES  |     | NULL    |       |
+| telefono_fijo     | varchar(20) | YES  |     | NULL    |       |
+| nss               | varchar(20) | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+12 rows in set (0.0056 sec)
+ MySQL  localhost:3306 ssl  empleados  SQL >
